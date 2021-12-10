@@ -93,9 +93,9 @@ const Productos = () => {
   };
 
   const saveProducto = () => {
-    setProducto({ ...producto, descripcion: producto.descripcion.toLowerCase() });
+    const productoCrt = { ...producto, descripcion: producto.descripcion.toLowerCase() };
     if (isUpdate) {
-      updateProducto(producto.sku, producto).subscribe({
+      updateProducto(producto.sku, productoCrt).subscribe({
         next: () => {
           setIsUpdate(false);
           getAllProductos();
@@ -103,7 +103,7 @@ const Productos = () => {
         error: (err) => setMessage(err.response.data.message),
       });
     } else {
-      createProducto(producto).subscribe({
+      createProducto(productoCrt).subscribe({
         next: () => getAllProductos(),
         error: (err) => setMessage(err.response.data.message),
       });
@@ -115,6 +115,16 @@ const Productos = () => {
       next: () => getAllProductos(),
       error: (err) => setMessage(err.response.data.message),
     });
+  };
+
+  const multiplica = (n1, n2) => {
+    let result = 0;
+
+    for (let i = 0; i < n2; i++) {
+      result += n1;
+    }
+
+    return result;
   };
 
   return (
